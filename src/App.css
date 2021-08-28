@@ -2,37 +2,103 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.payment-methods {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.css-button {
+  min-width: 180px;
+  height: 50px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background: #3a86ff;
+  box-shadow: 0 5px #0a3592;
+  font-size: 18px;
+}
+.css-button:hover {
+  box-shadow: 0 3px #0a3592;
+  top: 1px;
+}
+.css-button:active {
+  box-shadow: 0 0 #0a3592;
+  top: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.result{
+  margin:auto;
+  margin-top: 2rem;
+  width:500px;
+  text-align: center;
+}
+
+.amount-div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+label[for='amount'] .input-label {
+  color: #000;
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+label[for='amount'] {
+  width:160px;
+  border: solid 1px rgb(191, 192, 192);
+  color: #616161;
+  font-weight: 300;
+  padding: 1rem;
+  text-align: left;
+}
+
+input, input:focus {
+  width:160px;
+  outline: 0;
+  border: none;
+  color: #474747;
+  font-size: 20px;
+}
+
+input::after{
+  transform: translateY(-50%);
+  content: '$';
+  display: inline-block;
+  color: #474747;
+  line-height: 1;
+  left: 0px;
+  position: absolute;
+  top: 50%;
+}
+
+.hosted-fields{
+  height:50px;
+  min-width: 150px;
+  border: solid 1px rgb(191, 192, 192);
+  font-weight: 300;
+  padding-left: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.input-hosted{
+  color: #000;
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 4px;
 }
