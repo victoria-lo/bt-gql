@@ -24,7 +24,7 @@ export default function DropInComponent({
       <DropIn
         options={{
           authorization: clientToken,
-          paypal: { flow: "checkout", amount, currency: "SGD" },
+          //paypal: { flow: "checkout", amount, currency: "SGD" },
         }}
         onInstance={(instance) => setInstance(instance)}
       />
