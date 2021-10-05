@@ -1,16 +1,18 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
-.payment-methods {
+.center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width:100%;
 }
 
 .css-button {
-  min-width: 180px;
+  min-width: 140px;
   height: 50px;
   color: #fff;
   padding: 5px 10px;
@@ -42,10 +44,12 @@
   text-align: center;
 }
 
-.amount-div{
+.input-div{
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  margin-top: 20px;
 }
 
 label[for='amount'] .input-label {
@@ -66,7 +70,7 @@ label[for='amount'] {
   text-align: left;
 }
 
-input, input:focus {
+input[type="tel"], input:focus[type="tel"] {
   width:160px;
   outline: 0;
   border: none;
@@ -74,7 +78,7 @@ input, input:focus {
   font-size: 20px;
 }
 
-input::after{
+input[type="tel"]::after{
   transform: translateY(-50%);
   content: '$';
   display: inline-block;
@@ -101,4 +105,41 @@ input::after{
   font-weight: 500;
   line-height: 1;
   margin-bottom: 4px;
+}
+
+.buttons-div{
+  display:flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.flow-options{
+  width: 500px;
+  border: solid 1px rgb(191, 192, 192);
+  border-radius: 15px;
+  padding: 12px;
+  font-weight: 500;
+  font-size: large;
+  margin-bottom: 1.2em;
+}
+
+.search-div{
+  border: solid 1px rgb(191, 192, 192);
+  border-radius: 15px;
+  padding: 12px;
+  font-size: large;
+  margin: 0.8em;
+  display: flex;
+  width: 75vw;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.select{
+  padding: 10px;
+  font-size: 17px;
+  margin-top: 8px;
+  border: 1px solid lightgray;
+  color: #474747;
 }

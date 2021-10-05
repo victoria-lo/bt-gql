@@ -1,14 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_CLIENT_TOKEN = gql`
-  mutation {
-    createClientToken {
+  mutation createClientToken ($input: CreateClientTokenInput) {
+    createClientToken (input: $input) {
       clientToken
     }
-  }
+}
 `;
 
-export const CHARGE_PAYMENT_METHOD = gql`
+export const CHARGE = gql`
   mutation ChargePaymentMethod($input: ChargePaymentMethodInput!) {
     chargePaymentMethod(input: $input) {
       transaction {
@@ -23,3 +23,44 @@ export const CHARGE_PAYMENT_METHOD = gql`
     }
   }
 `;
+
+export const AUTHORIZE = gql`
+  mutation AuthorizePaymentMethod($input: AuthorizePaymentMethodInput!) {
+    authorizePaymentMethod(input: $input) {
+      transaction {
+        id
+        legacyId
+        amount {
+          value
+          currencyCode
+        }
+        status
+      }
+    }
+  }
+`;
+
+export const VAULT = gql`
+mutation VaultPaymentMethod($input: VaultPaymentMethodInput!) {
+  vaultPaymentMethod(input: $input) {
+    paymentMethod {
+      id
+      usage
+      details {
+        __typename
+        ... on CreditCardDetails {
+          cardholderName
+          bin
+          last4
+        }
+        ... on PayPalAccountDetails {
+          payerId
+          email
+        }
+      }
+    }
+    verification {
+      status
+    }
+  }
+}`;
