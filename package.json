@@ -2,6 +2,9 @@
   "name": "bt-gql",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@apollo/client": "^3.4.9",
     "@testing-library/jest-dom": "^5.14.1",
