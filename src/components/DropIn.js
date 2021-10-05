@@ -42,8 +42,8 @@ export default function DropInComponent({
             merchantId: 'merchant-id-from-google',
             transactionInfo: {
               totalPriceStatus: 'FINAL',
-              totalPrice: '123.45',
-              currencyCode: 'USD'
+              totalPrice: amount.toString(),
+              currencyCode: 'SGD'
             },
             allowedPaymentMethods: [{
               type: 'CARD',
@@ -58,7 +58,6 @@ export default function DropInComponent({
         }}
         onInstance={(instance) => setInstance(instance)}
       />
-      {flow==="vault"?<p>Note: Vaulted GooglePay cards cannot be displayed in Drop-in.</p>:null}
       {transaction ? (
         <Result transaction={transaction} reset={reset} />
       ) : (
