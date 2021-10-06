@@ -3,15 +3,19 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_CLIENT_TOKEN, CHARGE, AUTHORIZE, VAULT } from "./gql/Mutation";
 import { DropInComponent, Hosted, Search } from "./components";
+import { useValues } from "./ContextProvider";
 
 function App() {
   const [customerId, setCustomerId] = useState("victoria");
-  const [flow, setFlow] = useState("checkout");
 
   const [createClientToken] = useMutation(CREATE_CLIENT_TOKEN, {
     onCompleted: (data) => {
       console.log(data);
       setClientToken(data.createClientToken.clientToken);
+    },
+    onError: (error) => {
+      console.log(error);
+      alert(error);
     },
   });
 
@@ -21,6 +25,10 @@ function App() {
       console.log(data);
       setTransaction(data);
     },
+    onError: (error) => {
+      console.log(error);
+      alert(error);
+    },
   });
 
   const [authorizePaymentMethod] = useMutation(AUTHORIZE, {
@@ -29,6 +37,10 @@ function App() {
       console.log(data);
       setTransaction(data);
     },
+    onError: (error) => {
+      console.log(error);
+      alert(error);
+    },
   });
 
   const [vaultFromNonce] = useMutation(VAULT, {
@@ -36,6 +48,10 @@ function App() {
       console.log("Vault Successful");
       console.log(data);
       setTransaction(data);
+    },
+    onError: (error) => {
+      console.log(error);
+      alert(error);
     },
   });
 
@@ -81,53 +97,51 @@ function App() {
     }
   };
 
-  const [clientToken, setClientToken] = useState();
-  const [transaction, setTransaction] = useState(null);
-  const [amount, setAmount] = useState(1);
-  const [paymentType, setPaymentType] = useState();
-
-  const reset = () => {
-    setClientToken(null);
-    setTransaction(null);
-    setPaymentType(null);
-    setFlow("checkout");
+  const loadUI = (paymentType) => {
+    createClientToken(
+      flow === "vault"
+        ? {
+            variables: {
+              input: {
+                clientToken: {
+                  customerId: customerId,
+                },
+              },
+            },
+          }
+        : {}
+    );
+    setPaymentType(paymentType);
   };
+
+  const {
+    amount,
+    clientToken,
+    setTransaction,
+    setFlow,
+    setClientToken,
+    flow,
+    paymentType,
+    setPaymentType,
+  } = useValues();
 
   return (
     <div className="App">
       <h1>Braintree GraphQL Demo</h1>
       <p>Mutations</p>
-
       {clientToken && paymentType === "dropin" ? (
         <div style={{ textAlign: "left" }}>
-          <DropInComponent
-            clientToken={clientToken}
-            amount={amount}
-            setAmount={setAmount}
-            transaction={transaction}
-            proceed={proceed}
-            flow={flow}
-            reset={reset}
-          />
+          <DropInComponent proceed={proceed} />
         </div>
       ) : clientToken && paymentType === "hosted" ? (
         <div className="result" style={{ textAlign: "left" }}>
-          <Hosted
-            clientToken={clientToken}
-            amount={amount}
-            setAmount={setAmount}
-            transaction={transaction}
-            proceed={proceed}
-            flow={flow}
-            reset={reset}
-          />
+          <Hosted proceed={proceed} />
         </div>
       ) : (
         <div className="center">
           <div className="flow-options">
             <input
               type="radio"
-              id="choice1"
               value="checkout"
               name="flow"
               defaultChecked
@@ -137,7 +151,6 @@ function App() {
             <input
               style={{ marginLeft: "105px" }}
               type="radio"
-              id="choice2"
               value="vault"
               name="flow"
               onChange={(e) => setFlow(e.target.value)}
@@ -145,45 +158,12 @@ function App() {
             Vault Flow
           </div>
           <div className="center">
-            <button
-              className="css-button"
-              onClick={() => {
-                createClientToken(
-                  flow === "vault"
-                    ? {
-                        variables: {
-                          input: {
-                            clientToken: {
-                              customerId: customerId,
-                            },
-                          },
-                        },
-                      }
-                    : {}
-                );
-                setPaymentType("dropin");
-              }}
-            >
+            <button className="css-button" onClick={() => loadUI("dropin")}>
               Load Drop-In
             </button>
             <button
               className="css-button"
-              onClick={() => {
-                createClientToken(
-                  flow === "vault"
-                    ? {
-                        variables: {
-                          input: {
-                            clientToken: {
-                              customerId: customerId,
-                            },
-                          },
-                        },
-                      }
-                    : {}
-                );
-                setPaymentType("hosted");
-              }}
+              onClick={() => loadUI("hosted")}
               style={{ marginTop: "2rem" }}
             >
               Load Hosted Fields

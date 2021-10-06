@@ -15,16 +15,24 @@ export default function Search() {
       onCompleted: (data) => {
         console.log(data);
       },
+      onError: (error) => {
+        console.log(error);
+        alert(error);
+      }
     }
   );
 
-  const [searchByID, { node_loading, node_error, node_data }] = useLazyQuery(
+  const [searchByID] = useLazyQuery(
     NODE_SEARCH,
     {
-      onCompleted: (node_data) => {
-        console.log(node_data);
-        setSearchData(node_data);
+      onCompleted: (data) => {
+        console.log(data);
+        setSearchData(data);
       },
+      onError: (error) => {
+        console.log(error);
+        alert(error);
+      }
     }
   );
 
@@ -72,8 +80,6 @@ export default function Search() {
           >
             Get ID
           </button>
-
-          {error ? `Error! ${error}` : null}
           {data ? <p>Result: {data.idFromLegacyId}</p> : null}
         </div>
 

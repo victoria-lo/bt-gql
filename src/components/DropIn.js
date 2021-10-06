@@ -2,16 +2,12 @@ import DropIn from "braintree-web-drop-in-react";
 import "../App.css";
 import { useState } from "react";
 import {Proceed, Result} from "./index";
+import { useValues } from "../ContextProvider";
 
 export default function DropInComponent({
-  clientToken,
-  transaction,
-  reset,
-  proceed,
-  flow,
-  amount,
-  setAmount,
+  proceed
 }) {
+  const {amount, clientToken, reset, flow, transaction} = useValues();
   const [instance, setInstance] = useState(null);
 
   const capture = async () => {
@@ -58,11 +54,8 @@ export default function DropInComponent({
         }}
         onInstance={(instance) => setInstance(instance)}
       />
-      {transaction ? (
-        <Result transaction={transaction} reset={reset} />
-      ) : (
-        <Proceed buy={capture} auth={authorize} flow={flow} vault={vault} amount={amount} setAmount={setAmount} />
-      )}
+      {flow==="vault"?<p>Note: Vaulted GooglePay cards will not be displayed in Drop-in.</p>:null}
+      {transaction ? <Result /> : <Proceed buy={capture} auth={authorize} vault={vault} />}
     </div>
   );
 }

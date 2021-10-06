@@ -1,7 +1,9 @@
 import React from "react";
 import "../App.css";
+import { useValues } from "../ContextProvider";
 
-export default function Result({transaction, reset}) {
+export default function Result() {
+  const {transaction, reset} = useValues();
   return (
     <div className="result">
       <h3>Process Successful!</h3>

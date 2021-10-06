@@ -1,7 +1,9 @@
 import "../App.css";
+import { useValues } from "../ContextProvider";
 
-function Proceed({ buy, auth, vault, flow, amount, setAmount }) {
+function Proceed({ buy, auth, vault }) {
   //Buy, Authorize or Vault Payment method
+  const { flow, amount, setAmount}= useValues();
   return (
     <div className="input-div">
       <label htmlFor="amount">

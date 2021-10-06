@@ -2,18 +2,13 @@ import { Braintree, HostedField } from "react-braintree-fields";
 import "../App.css";
 import { useState } from "react";
 import {Proceed, Result} from "./index";
+import { useValues } from "../ContextProvider";
 
 export default function Hosted({
-  clientToken,
-  transaction,
-  reset,
-  amount,
-  setAmount,
-  flow,
   proceed
 }) {
   const [tokenize, setTokenizeFunc] = useState();
-
+  const {clientToken, reset, transaction} = useValues();
   const capture = () => {
     tokenize().then((data) => proceed(data.nonce, "charge"));
   };
@@ -53,7 +48,7 @@ export default function Hosted({
       {transaction ? (
         <Result transaction={transaction} reset={reset} />
       ) : (
-        <Proceed buy={capture} auth={authorize} flow={flow} vault={vault} amount={amount} setAmount={setAmount} />
+        <Proceed buy={capture} auth={authorize} vault={vault} />
       )}
     </div>
   );

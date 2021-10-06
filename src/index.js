@@ -8,6 +8,7 @@ import {
   ApolloProvider,
   createHttpLink
 } from "@apollo/client";
+import ContextProvider from './ContextProvider';
 
 import { setContext } from '@apollo/client/link/context';
 
@@ -40,7 +41,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ContextProvider>
+      <App />
+    </ContextProvider>
   </ApolloProvider>,
   document.getElementById('root')
 );
