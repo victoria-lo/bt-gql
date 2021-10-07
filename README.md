@@ -11,6 +11,19 @@ Simple demo showcasing Braintree Drop-in UI and Hosted Fields via GraphQL API
 3. Create `.env` file with:
 ```
 REACT_APP_PRIVATE_KEY=your braintree private key
-REACT_APP_PUBLIC_KEY=your braintre public key
+REACT_APP_PUBLIC_KEY=your braintree public key
 ```
 4. Run `npm start`
+
+## Test Cards
+```
+Card Number: 4111 1111 1111 1111
+Exp Date: 12/23
+CVV: 123
+```
+
+```
+Card Number: 5555 5555 5555 4444
+Exp Date: 12/23
+CVV: 123
+```
