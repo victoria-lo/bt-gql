@@ -2,7 +2,8 @@ import "./App.css";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_CLIENT_TOKEN, CHARGE, AUTHORIZE, VAULT } from "./gql/Mutation";
-import { DropInComponent, Hosted, Search } from "./components";
+import { DropInComponent, Hosted, Search} from "./components";
+import { PayPalComponent } from "./components/PayPal";
 import { useValues } from "./ContextProvider";
 
 function App() {
@@ -137,6 +138,10 @@ function App() {
         <div className="result" style={{ textAlign: "left" }}>
           <Hosted proceed={proceed} />
         </div>
+      ) : clientToken && paymentType === "paypal" ? (
+        <div className="result" style={{ textAlign: "left" }}>
+          <PayPalComponent proceed={proceed} />
+        </div>
       ) : (
         <div className="center">
           <div className="flow-options">
@@ -167,6 +172,13 @@ function App() {
               style={{ marginTop: "2rem" }}
             >
               Load Hosted Fields
+            </button>
+            <button
+              className="css-button"
+              onClick={() => loadUI("paypal")}
+              style={{ marginTop: "2rem" }}
+            >
+              Load PayPal Button
             </button>
           </div>
           <Search />
