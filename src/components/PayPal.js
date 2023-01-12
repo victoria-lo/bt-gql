@@ -1,4 +1,4 @@
-import { Proceed, Result } from "./index";
+import { Result } from "./index";
 import { useValues } from "../ContextProvider";
 import {
     PayPalScriptProvider,
