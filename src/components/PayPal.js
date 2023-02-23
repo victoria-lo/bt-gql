@@ -12,6 +12,7 @@ export function PayPalComponent({proceed}) {
 
     return (
         <div>
+	    {clientToken &&
             <PayPalScriptProvider
                 options={{
                     "client-id": process.env.REACT_APP_CLIENT_ID,
@@ -59,7 +60,7 @@ export function PayPalComponent({proceed}) {
                     }}
                 />         
             }    
-            </PayPalScriptProvider>
+            </PayPalScriptProvider>}
             {transaction?
                 <Result transaction={transaction} reset={reset} />: 
                 <div className="input-div">
