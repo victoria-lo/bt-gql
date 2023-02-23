@@ -2,13 +2,14 @@ import "./App.css";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_CLIENT_TOKEN, CHARGE, AUTHORIZE, VAULT } from "./gql/Mutation";
-import { DropInComponent, Hosted, Search} from "./components";
+import { DropInComponent, Hosted, Search } from "./components";
+import CreditCardInput from "./components/CreditCard";
 import { PayPalComponent } from "./components/PayPal";
 import { useValues } from "./ContextProvider";
 
 function App() {
   const [customerId, setCustomerId] = useState("victoria");
-
+  
   const [createClientToken] = useMutation(CREATE_CLIENT_TOKEN, {
     onCompleted: (data) => {
       console.log(data);
@@ -129,7 +130,7 @@ function App() {
   return (
     <div className="App">
       <h1>Braintree GraphQL Demo</h1>
-      <p>Mutations</p>
+      <h3>Mutations</h3>
       {clientToken && paymentType === "dropin" ? (
         <div style={{ textAlign: "left" }}>
           <DropInComponent proceed={proceed} />
@@ -142,7 +143,11 @@ function App() {
         <div className="result" style={{ textAlign: "left" }}>
           <PayPalComponent proceed={proceed} />
         </div>
-      ) : (
+      ) : paymentType === "graphql" ? (
+        <div className="result" style={{ textAlign: "left" }}>
+          <CreditCardInput proceed={proceed}/>
+        </div>
+      ): (
         <div className="center">
           <div className="flow-options">
             <input
@@ -180,7 +185,14 @@ function App() {
             >
               Load PayPal Button
             </button>
-          </div>
+            <button
+              className="css-button"
+              onClick={() => loadUI("graphql")}
+              style={{ marginTop: "2rem" }}
+            >
+              Load GraphQL Only Flow
+            </button>
+          </div>          
           <Search />
         </div>
       )}

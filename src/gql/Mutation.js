@@ -8,6 +8,16 @@ export const CREATE_CLIENT_TOKEN = gql`
 }
 `;
 
+export const TOKENIZE_CARD = gql`
+mutation TokenizeCreditCard($input: TokenizeCreditCardInput!) {
+  tokenizeCreditCard(input: $input){
+    paymentMethod{
+      id
+    }
+  }
+}
+`
+
 export const CHARGE = gql`
   mutation ChargePaymentMethod($input: ChargePaymentMethodInput!) {
     chargePaymentMethod(input: $input) {
@@ -45,6 +55,7 @@ mutation VaultPaymentMethod($input: VaultPaymentMethodInput!) {
   vaultPaymentMethod(input: $input) {
     paymentMethod {
       id
+      legacyId
       usage
       details {
         __typename

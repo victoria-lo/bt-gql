@@ -38,7 +38,7 @@ export default function Search() {
 
   return (
     <div style={{ marginTop: "2em" }}>
-      <p>Queries</p>
+      <h3>Queries</h3>
       <div className="search-div">
         <div className="center">
           <p style={{ marginBottom: 0 }}>Get ID from LegacyId</p>
