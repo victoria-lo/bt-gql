@@ -194,7 +194,19 @@ function App() {
             </button>
           </div>          
           <Search />
-          <p>Built by Victoria Lo</p>
+          <div style={{marginBottom:"50px",textAlign:"left"}}>
+            <p>This is a demo website to showcase Braintree Integration with GraphQL.</p>
+            <p>Built By Victoria Lo.</p>
+            
+            <div>
+            <p>Checkout other demo sites:</p>
+              <li><a href="https://btplayground.onrender.com/">Braintree Playground</a></li>
+              <li><a href="https://btgql-apm.onrender.com/">Braintree GraphQL APMs</a></li>
+              <li><a href="https://shopaholix.onrender.com/">PayPal Playground (Shopaholix)</a></li>
+              <li><a href="https://radio-btn-demo.onrender.com/">PayPal Radio Buttons Demo</a></li>
+            </div>
+          </div>
+          
         </div>
       )}
     </div>
