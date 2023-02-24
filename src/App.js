@@ -194,6 +194,7 @@ function App() {
             </button>
           </div>          
           <Search />
+          <p>Built by Victoria Lo</p>
         </div>
       )}
     </div>

@@ -55,12 +55,7 @@ export default function CreditCardInput({proceed}) {
     }
 
     const reset = () =>{
-        setcardNumber("4111111111111111");
-        setexpMonth("12");
-        setexpYear("24")
-        setCvv("123");
-        setNonce("");
-        setTransaction(null);
+        window.location.reload();
     }
 
     return (
